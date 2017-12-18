@@ -1,0 +1,156 @@
+﻿@model Eternal.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="jumbotron col-md-10 col-md-offset-1 col-xs-12">
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div class="col-md-5 col-xs-10 col-xs-offset-1">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading" style="font-size:large;">
+                        Login
+                    </div>
+
+                    <div class="panel-body">
+
+                        @if (ViewData["VerificationEmailMessage"] != null)
+                        {
+                            <div class="alert alert-success">@ViewData["VerificationEmailMessage"]</div>
+                        }
+                        else if (ViewData["UnverifiedMessage"] != null)
+                        {
+                            <div id="unverified-message" class="alert alert-warning">@ViewData["UnverifiedMessage"] <a id="@ViewData["UnverifiedEmail"]" class="email-verification-link" href="#">Resend Email</a></div>
+                        }
+                        else if (ViewData["InvalidLoginMessage"] != null)
+                        {
+                            <div class="alert alert-danger">@ViewData["InvalidLoginMessage"]</div>
+                        }
+                        else if (ViewData["ActivationMessage"] != null)
+                        {
+                            <div class="alert alert-success">@ViewData["ActivationMessage"]</div>
+                        }
+                        else if (ViewData["PasswordResetMessage"] != null)
+                        {
+                            <div class="alert alert-success">@ViewData["PasswordResetMessage"]</div>
+                        }
+
+                        <form asp-action="Login">
+                            <div class="form-horizontal">
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12 col-xs-12">
+                                        <label asp-for="Email"></label>
+                                        <input asp-for="Email" class="form-control" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12 col-xs-12">
+                                        <label asp-for="Password"></label>
+                                        <input asp-for="Password" class="form-control" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12 col-xs-12">
+                                        <input type="submit" value="Login" class="btn btn-default" />
+                                        | <a asp-action="ForgotPassword">Forgot Password</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5 col-xs-10 col-xs-offset-1">
+                <div class="panel panel-default">
+
+                    <div class="panel-heading" style="font-size:large;">
+                        Register
+                    </div>
+
+                    <div class="panel-body">
+
+                        @if (ViewData["DuplicateEmailMessage"] != null)
+                        {
+                            <div class="alert alert-danger">@ViewData["DuplicateEmailMessage"]</div>
+                        }
+                        @if (ViewData["DuplicateUsernameMessage"] != null)
+                        {
+                            <div class="alert alert-danger">@ViewData["DuplicateUsernameMessage"]</div>
+                        }
+
+                        <form asp-action="Register">
+                            <div class="form-horizontal">
+
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12 col-xs-12">
+                                        <label asp-for="Email"></label>
+                                        <input asp-for="Email" class="form-control" value="@ViewData["RegisterEmailInputValue"]" />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12 col-xs-12">
+                                        <label asp-for="Username"></label>
+                                        <input asp-for="Username" class="form-control" />
+                                        <span asp-validation-for="Username" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12 col-xs-12">
+                                        <label asp-for="Password"></label>
+                                        <input asp-for="Password" class="form-control" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12 col-xs-12">
+                                        <label asp-for="ConfirmPassword"></label>
+                                        <input asp-for="ConfirmPassword" class="form-control" />
+                                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-10 col-xs-10">
+                                        <input type="submit" value="Register" class="btn btn-default" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $('.email-verification-link').on('click', function (e) {
+            e.preventDefault();
+            $.get('/Users/SendVerification', { email: this.id })
+                .done(function () {
+                    window.location.replace('?emailSent=true');
+                });     
+        });
+    </script>
+}

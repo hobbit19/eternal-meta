@@ -1,0 +1,145 @@
+﻿@model Eternal.Models.Deck
+
+@{
+    ViewData["Title"] = "Edit " + Model.Name;
+}
+
+<div class="jumbotron col-md-12 col-xs-12">
+
+    <div class="row">
+        <div class="col-md-7 col-xs-12">
+            <div class=" well well-sm collection-filters">
+                <form name="card-filters" id="collection-form">
+                    <div class="form-horizontal">
+
+                        <div class="form-group">
+                            <div class="col-md-12 col-xs-12">
+                                <label>Search for a card</label>
+                                <input class="form-control" id="searchString" />
+                            </div>
+                        </div>
+
+                        <!-- faction filter -->
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <p style="font-size:medium;border-bottom:1px solid black;"><strong>Factions</strong></p>
+                                <span><img id="Fire" class="faction-icon" src="~/images/icons/factions/fire-icon.png" /></span>
+                                <span><img id="Time" class="faction-icon" src="~/images/icons/factions/time-icon.png" /></span>
+                                <span><img id="Justice" class="faction-icon" src="~/images/icons/factions/justice-icon.png" /></span>
+                                <span><img id="Primal" class="faction-icon" src="~/images/icons/factions/primal-icon.png" /></span>
+                                <span><img id="Shadow" class="faction-icon" src="~/images/icons/factions/shadow-icon.png" /></span>
+                                <span><img id="Multifaction" class="faction-icon" src="~/images/icons/factions/multifaction-icon.png" /></span>
+                                <span><img id="Factionless" class="faction-icon" src="~/images/icons/factions/factionless-icon.png" /></span>
+                                <input name="factionFilter" value="@ViewData["FactionFilter"]" hidden />
+                            </div>
+                        </div>
+
+                        <!-- cost filter -->
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <p style="font-size:medium;border-bottom:1px solid black;"><strong>Power</strong></p>
+                                <span><img id="0" class="power-icon" src="~/images/icons/power/0.png" /></span>
+                                <span><img id="1" class="power-icon" src="~/images/icons/power/1.png" /></span>
+                                <span><img id="2" class="power-icon" src="~/images/icons/power/2.png" /></span>
+                                <span><img id="3" class="power-icon" src="~/images/icons/power/3.png" /></span>
+                                <span><img id="4" class="power-icon" src="~/images/icons/power/4.png" /></span>
+                                <span><img id="5" class="power-icon" src="~/images/icons/power/5.png" /></span>
+                                <span><img id="6" class="power-icon" src="~/images/icons/power/6.png" /></span>
+                                <span><img id="7" class="power-icon" src="~/images/icons/power/7.png" /></span>
+                                <input name="costFilter" value="@ViewData["CostFilter"]" hidden />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input class="btn btn-default" type="submit" value="Apply Filters" /> |
+                                <a style="display:inline-block;" href="#" id="reset-filter-link">Reset Filters</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-xs-12">
+            <div class="well well-sm">
+                Deck Information
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div id="deck-builder-container">
+            <div class="col-md-7">
+                <div class="well well-sm">
+                    <div id="collection-vm-container">
+                        @await Component.InvokeAsync("DeckBuilderCollection")
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5" id="table-container">
+                <div class="well well-sm">
+                    <table id="deck-table" class="deck-table table">
+                        <tr>
+                            <th colspan="3" id="cc" style="text-align:center;">Deck - 0</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="deck-guide">
+            <form id="deck-builder-form" name="create-deck" asp-action="Edit">
+                <div class="form-horizontal">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-xs-6">
+                            <label asp-for="Name">Give your deck a name</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input asp-for="Factions" hidden />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <label asp-for="Guide">Then write your guide</label>
+                            <textarea asp-for="Guide" rows="20" class="form-control" ></textarea>
+                            <span asp-validation-for="Guide" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input asp-for="DeckList" id="deck-list" hidden />
+                            <span asp-validation-for="DeckList" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input id="submit-button" type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/DeckBuilder.js"></script>
+    <script src="~/js/DeckBuilderCollectionController.js"></script>
+}

@@ -1,0 +1,31 @@
+﻿@if (Context.User.Identity.IsAuthenticated)
+{
+    <ul class="nav navbar-nav navbar-right">
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">@Context.User.Claims.ElementAt(1).Value</a>
+            <ul class="dropdown-menu" role="menu">
+                <li>
+                    @Html.ActionLink("Dashboard", "Index", "Users", new { id = int.Parse(Context.User.Claims.ElementAt(0).Value) })
+                </li>
+
+                <li class="divider"></li>
+                <li>
+                    <a asp-action="Logout" asp-controller="Users">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <a asp-area="" asp-controller="Users" asp-action="Login">
+                <!--<i class="fa fa-sign-in" aria-hidden="true"></i>-->Login / Register
+            </a>
+        </li>
+    </ul>
+}

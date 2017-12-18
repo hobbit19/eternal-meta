@@ -1,0 +1,90 @@
+﻿@model Eternal.Models.ViewModels.DeckComments
+
+<div class="comments-container row">
+    <div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            foreach (var comment in Model.Comments)
+            {
+                var user = Model.Users.SingleOrDefault(u => u.UserID == comment.UserID);
+
+                switch (comment.UserRating)
+                {
+                    case 0:
+                        <div id="container-@comment.DeckCommentID-container" class="col-md-12 col-xs-12">
+                            <div class="well well-sm" style="background-color:lightgrey;">
+                                <p id="container-@comment.DeckCommentID" class="comment"><strong id="username">@user.Username</strong> : <span id="text-@comment.DeckCommentID">@comment.Comment</span></p>
+                                <span id="likes-@comment.DeckCommentID">@comment.Rating</span>
+                                <button class="rating-button btn btn-default btn-sm" id="like-comment-@comment.DeckCommentID" onclick="rateComment(@comment.DeckCommentID)">+1</button>
+                                @if (comment.UserID.ToString() == User.Claims.ElementAt(0).Value)
+                                {
+                                    <a id="@comment.DeckCommentID" class="edit-comment-link" href="Edit">Edit</a>
+                                    <a id="@comment.DeckCommentID" class="delete-comment-link" href="Delete">Delete</a>
+                                }
+                                else
+                                {
+                                    <a id="@comment.DeckCommentID" class="report-comment-link" href="Report">Report</a>
+                                }
+                            </div>
+                        </div>
+                        break;
+
+                    case 1:
+                        <div id="container-@comment.DeckCommentID-container" class="col-md-12 col-xs-12">
+                            <div class="well well-sm" style="background-color:lightgrey;">
+                                <p id="container-@comment.DeckCommentID"><strong id="username">@user.Username</strong> : <span id="text-@comment.DeckCommentID">@comment.Comment</span></p>
+                                <span id="likes-@comment.DeckCommentID">@comment.Rating</span>
+                                <button class="rating-button btn btn-default btn-sm" id="like-comment-@comment.DeckCommentID" onclick="rateComment(@comment.DeckCommentID)">+1</button>
+                                @if (comment.UserID.ToString() == User.Claims.ElementAt(0).Value)
+                                {
+                                    <a id="@comment.DeckCommentID" class="edit-comment-link" href="Edit">Edit</a>
+                                    <a id="@comment.DeckCommentID" class="delete-comment-link" href="Delete">Delete</a>
+                                }
+                                else
+                                {
+                                    <a id="@comment.DeckCommentID" class="report-comment-link" href="Report">Report</a>
+                                }
+                            </div>
+                        </div>
+                        break;
+                }
+            }
+        }
+        else
+        {
+            foreach (var comment in Model.Comments)
+            {
+
+                var user = Model.Users.SingleOrDefault(u => u.UserID == comment.UserID);
+                <div class="col-md-12 col-xs-12">
+                    <div class="comment well well-sm" style="background-color:lightgrey;">
+                        <p class="comment"><strong>@user.Username : </strong>@comment.Comment</p>
+                        <span id="likes-@comment.DeckCommentID">@comment.Rating</span>
+                        <button class="btn btn-default btn-sm rating-button" onclick="redirectToLogin()">+1</button>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form name="comment-form" id="comment-form">
+            <div class="col-md-6 col-xs-6">
+                <div class="well well-sm">
+                    <input name="comment-text" class="comment-text form-control" placeholder="Leave a comment..." required />
+                    <input type="submit" hidden />
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <div class="col-md-6 col-xs-6">
+            <div class="well well-sm">
+                <p><a asp-controller="Users" asp-action="Login">Login/Register</a></p>
+            </div>
+        </div>
+    }
+</div>

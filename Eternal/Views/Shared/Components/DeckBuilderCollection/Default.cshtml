@@ -1,0 +1,33 @@
+﻿@model PaginatedList<Eternal.Models.Card>
+
+<div class="collection-vm">
+
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+
+    <button style="float:left;" class="btn btn-default" onclick="changePage(@(Model.PageIndex - 1), '@ViewData["SearchFilter"]', '@ViewData["FactionFilter"]', '@ViewData["CostFilter"]')" @prevDisabled>
+        Previous
+    </button>
+
+    <button style="float:right;" class="btn btn-default" onclick="changePage(@(Model.PageIndex + 1), '@ViewData["SearchFilter"]', '@ViewData["FactionFilter"]', '@ViewData["CostFilter"]')" @nextDisabled>
+        Next
+    </button>
+
+    <br />
+    <br />
+
+    <div class="collection">
+        <div class="row">
+            @foreach (var card in Model)
+            {
+                <div class="col-md-3 col-xs-3">
+                    <button class="card-image-button" id="@card.CardID;@card.Name;@card.Factions;@card.Cost;@card.Type" onclick="addCard(this)">
+                        <img class="card-image img-responsive" src="@Url.Content(card.ImageUrl)" />
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

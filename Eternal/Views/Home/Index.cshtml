@@ -1,0 +1,74 @@
+﻿@model Eternal.Models.ViewModels.FeaturedContent
+
+@{
+    ViewData["Title"] = "Eternal Card Game Deck Builder and Card Browser";
+}
+
+<div class="jumbotron col-md-10 col-md-offset-1 col-xs-12">
+
+    <h2>Featured Decks</h2>
+
+    <div class="row">
+
+        @foreach (var deck in Model.FeaturedDecks)
+        {
+            <div class="col-md-4 col-xs-12">
+
+                <a asp-action="Details" asp-controller="Decks" asp-route-id="@deck.DeckID" style="text-decoration:none;">
+                    <div class="well well-sm featured">
+                        <center>
+                            @deck.Name
+                            <br />
+                            @{
+                                var factions = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(deck.Factions);
+                                foreach (var faction in factions)
+                                {
+                                    <span><img style="width:20px;height:20px;" src="~/images/icons/factions/@faction.ToLower()-icon.png" /></span>
+                                }
+                            }
+                            <br />
+                            by @deck.Username
+                        </center>
+                    </div>
+                </a>
+            </div>
+        }
+        <div class="col-md-12 col-xs-12">
+            <a asp-action="Index" asp-controller="Decks" class="btn btn-default">View all decks</a> |
+            <a asp-action="Create" asp-controller="Decks" class="btn btn-default">Create a deck</a>
+        </div>
+
+    </div>
+
+    <h2>Featured Cards</h2>
+
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+
+            <div class="well well-sm">
+
+                <div class="row">
+
+                    @foreach (var card in Model.FeaturedCards)
+                    {
+                        <div class="col-md-2 col-xs-4">
+                            <a class="card-link" href="@Url.Action("Details", "Cards", new { id = card.CardID })">
+                                <img class="card-image img-responsive" src="@Url.Content(card.ImageUrl)" />
+                            </a>
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div>
+                <a asp-action="Index" asp-controller="Cards" class="btn btn-default">View all cards</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

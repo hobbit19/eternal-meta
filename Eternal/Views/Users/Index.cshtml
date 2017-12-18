@@ -1,0 +1,68 @@
+﻿@model Eternal.Models.ViewModels.UserIndex
+
+@{
+    ViewData["Title"] = "My Dashboard";
+}
+
+<div class="jumbotron col-md-10 col-xs-12 col-md-offset-1">
+    <div class="row">
+        <div class="well well-sm col-md-6 col-md-offset-3">
+            <h2>Your Profile</h2>
+
+            @if (ViewData["PasswordChangedMessage"] != null)
+            {
+                <div class="alert alert-success">@ViewData["PasswordChangedMessage"]</div>
+            }
+            else if (ViewData["DeckDeletedMessage"] != null)
+            {
+                <div class="alert alert-success">@ViewData["DeckDeletedMessage"]</div>
+            }
+
+            @Html.ActionLink("Change Password", "ChangePassword")
+            <hr />
+
+            <center>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="2" style="text-align:center;">My Decks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var deck in Model.Decks)
+                        {
+                            <tr>
+                                <td>
+                                    @deck.Name
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "Decks", new { id = deck.DeckID }) |
+                                    <a id="@deck.DeckID;@deck.UserID;@deck.Name" class="delete-deck" href="@Url.Action("Delete", "Decks", new { id = deck.DeckID })">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </center>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $('.delete-deck').on('click', function (e) {
+            e.preventDefault();
+            var deckInfo = this.id.split(';');
+            var deckId = parseInt(deckInfo[0]);
+            var userId = parseInt(deckInfo[1]);
+            var deckName = deckInfo[2];
+            if (confirm('Are you sure you want to delete ' + deckName + '?'))
+            {
+                $.post('../../Decks/Delete', { id: deckId });
+                setTimeout(function () {
+                    window.location.replace(userId + '?deckDeleted=true&deckName=' + deckName);
+                }, 1500);
+            }
+        });
+    </script>
+}

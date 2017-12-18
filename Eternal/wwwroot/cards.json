@@ -1,0 +1,282 @@
+﻿[
+  {
+    "Name": "Fire Sigil",
+    "Type": "Power",
+    "Text": "",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Basic",
+    "Cost": 0,
+    "ImageUrl": "~/images/cards/Fire Sigil.png"
+  },
+  {
+    "Name": "Granite Monument",
+    "Type": "Power",
+    "Text": "Depleted. Transmute 5: 4/1 Magmahound with Charge.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Uncommon",
+    "Cost": 0,
+    "ImageUrl": "~/images/cards/Granite Monument.png"
+  },
+  {
+    "Name": "Trail Stories",
+    "Type": "Spell",
+    "Text": "Reduce the cost of a spell in your hand by 1.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Rare",
+    "Cost": 0,
+    "ImageUrl": "~/images/cards/Trail Stories.png"
+  },
+  {
+    "Name": "Firemane Cub",
+    "Type": "Elemental Beast",
+    "Text": "Summon: Deal 1 damage to an enemy unit.",
+    "Factions": "Fire",
+    "Set": "Omens of the Past",
+    "Rarity": "Uncommon",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Firemane Cub.png"
+  },
+  {
+    "Name": "Forge Wolf",
+    "Type": "Beast",
+    "Text": "Summon: Deal 1 damage to the enemy player.",
+    "Factions": "Fire",
+    "Set": "Omens of the Past",
+    "Rarity": "Common",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Forge Wolf.png"
+  },
+  {
+    "Name": "Grenadin Drone",
+    "Type": "Grenadin",
+    "Text": "Summon: Play a 1/1 Grenadin.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Common",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Grenadin Drone.png"
+  },
+  {
+    "Name": "Heavy Axe",
+    "Type": "Weapon",
+    "Text": "",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Common",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Heavy Axe.png"
+  },
+  {
+    "Name": "Hidden Shiv",
+    "Type": "Weapon",
+    "Text": "Warp",
+    "Factions": "Fire",
+    "Set": "Omens of the Past",
+    "Rarity": "Uncommon",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Hidden Shiv.png"
+  },
+  {
+    "Name": "Light the Fuse",
+    "Type": "Spell",
+    "Text": "Put five Firebombs into the enemy deck.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Legendary",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Light the Fuse.png"
+  },
+  {
+    "Name": "On the Hunt",
+    "Type": "Spell",
+    "Text": "Put a 4/4 Hellhound with Charge on top of your deck.",
+    "Factions": "Fire",
+    "Set": "Omens of the Past",
+    "Rarity": "Rare",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/On the Hunt.png"
+  },
+  {
+    "Name": "Oni Ronin",
+    "Type": "Oni",
+    "Text": "Warcry",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Common",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Oni Ronin.png"
+  },
+  {
+    "Name": "Pummel",
+    "Type": "Fast Spell",
+    "Text": "Give one of your attacking units +2/+2 this turn. Look at the top card of your deck. You may put it on the bottom.",
+    "Factions": "Fire",
+    "Set": "Omens of the Past",
+    "Rarity": "Common",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Pummel.png"
+  },
+  {
+    "Name": "Pyroknight",
+    "Type": "Warrior",
+    "Text": "Overwhelm. Ultimate: Pay 6 to give Pyroknight +4/+4.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Rare",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Pyroknight.png"
+  },
+  {
+    "Name": "Ruin",
+    "Type": "Fast Spell",
+    "Text": "Kill and enemy attachment.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Common",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Ruin.png"
+  },
+  {
+    "Name": "Ruthless Stranger",
+    "Type": "Stranger",
+    "Text": "Strangers have +1 Strength.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Uncommon",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Ruthless Stranger.png"
+  },
+  {
+    "Name": "Temper",
+    "Type": "Fast Spell",
+    "Text": "Deal 1 damage. The top unit or weapon of your deck gets +1/+1.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Common",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Temper.png"
+  },
+  {
+    "Name": "Ticking Grenadin",
+    "Type": "Grenadin",
+    "Text": "Entomb: Deal 3 damage to the enemy player.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Common",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Ticking Grenadin.png"
+  },
+  {
+    "Name": "Torch",
+    "Type": "Fast Spell",
+    "Text": "Deal 3 damage.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Common",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Torch.png"
+  },
+  {
+    "Name": "Warhelm",
+    "Type": "Weapon",
+    "Text": "Warcry, Charge",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Uncommon",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Warhelm.png"
+  },
+  {
+    "Name": "Young Gun",
+    "Type": "Gunslinger",
+    "Text": "Quickdraw",
+    "Factions": "Fire",
+    "Set": "Omens of the Past",
+    "Rarity": "Common",
+    "Cost": 1,
+    "ImageUrl": "~/images/cards/Young Gun.png"
+  },
+  {
+    "Name": "Bladekin Apprentice",
+    "Type": "Oni",
+    "Text": "Quickdraw. When Bladekin Apprentice attacks, she gets +1 Strength.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Uncommon",
+    "Cost": 2,
+    "ImageUrl": "~/images/cards/Bladekin Apprentice.png"
+  },
+  {
+    "Name": "Blazing Renegade",
+    "Type": "Rebel Gunslinger",
+    "Text": "Charge",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Common",
+    "Cost": 2,
+    "ImageUrl": "~/images/cards/Blazing Renegade.png"
+  },
+  {
+    "Name": "Blinkwolf",
+    "Type": "Beast",
+    "Text": "Warp",
+    "Factions": "Fire",
+    "Set": "Omens of the Past",
+    "Rarity": "Common",
+    "Cost": 2,
+    "ImageUrl": "~/images/cards/Blinkwolf.png"
+  },
+  {
+    "Name": "Brazen Daredevil",
+    "Type": "Gunslinger",
+    "Text": "Reckless. When Brazen Daredevil attacks, she deals her Strength in damage to a random enemy.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Rare",
+    "Cost": 2,
+    "ImageUrl": "~/images/cards/Brazen Daredevil.png"
+  },
+  {
+    "Name": "Charchain Flail",
+    "Type": "Relic Weapon",
+    "Text": "Summon: Spend your remaining power to give Charchain Flail that much Strength.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Rare",
+    "Cost": 2,
+    "ImageUrl": "~/images/cards/Charchain Flail.png"
+  },
+  {
+    "Name": "Flame Blast",
+    "Type": "Spell",
+    "Text": "Deal 1 damage. Spend your remaining power to increase the damage dealt by that much.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Uncommon",
+    "Cost": 2,
+    "ImageUrl": "~/images/cards/Flame Blast.png"
+  },
+  {
+    "Name": "Frontier Jito",
+    "Type": "Oni",
+    "Text": "Charge. Your units that cost 1 or less have Charge.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Rare",
+    "Cost": 2,
+    "ImageUrl": "~/images/cards/Frontier Jito.png"
+  },
+  {
+    "Name": "Kaleb's Favor",
+    "Type": "Spell",
+    "Text": "Deal 2 damage to the enemy player. Draw a Fire Sigil from your deck.",
+    "Factions": "Fire",
+    "Set": "The Empty Throne",
+    "Rarity": "Common",
+    "Cost": 2,
+    "ImageUrl": "~/images/cards/Kaleb's Favor.png"
+  }
+]

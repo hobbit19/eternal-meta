@@ -1,0 +1,168 @@
+﻿body {
+    padding-top: 50px;
+    background-image: url("../images/background.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+html {
+    
+}
+
+.navbar {
+}
+
+.panel {
+
+}
+
+footer {
+    background-color: black;
+    color: white;
+}
+
+.jumbotron {
+    min-height: 500px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.container-fluid .jumbotron {
+    border-radius: 0px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-top: 30px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.cards-container {
+    
+}
+
+.card-link {
+    
+}
+
+.card-image {
+}
+
+.card-image:hover {
+
+}
+
+.card-image-button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.card-link:hover {
+    color: transparent;
+}
+
+.card-link:focus {
+    color: transparent;
+}
+
+.well {
+    border-radius: 0;
+}
+
+.rating-button {
+    color: black;
+    outline: none;
+}
+
+.comment-text {
+    color: black;
+}
+
+.deck-guide-input {
+    grid-auto-rows: auto;
+}
+
+#deck-table {
+    font-size: 20px;
+    text-align: center;
+    border: 1px solid darkgrey;
+    width: 100%;
+}
+
+textarea {
+    resize: none;
+}
+
+.faction-icon {
+    width: 25px;
+    height: 25px;
+    cursor:pointer;
+}
+
+.power-icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.power-icon:hover {
+    
+}
+
+.popup-card {
+    position: absolute;
+}
+
+.popup-card-image {
+    width: 250px;
+}
+
+.featured {
+    height: 100px;
+    background-color: #2b2a2a;
+    cursor: pointer;
+    color: white;
+    padding-top:15px;
+}
+
+.featured:hover {
+    border: 1px solid red;
+}
+
+.username {
+    margin: auto;
+    overflow-wrap: break-word;
+}

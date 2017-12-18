@@ -1,0 +1,70 @@
+﻿@model Eternal.Models.ViewModels.CardDetails
+
+@{
+    ViewData["Title"] = Model.Card.Name;
+}
+
+<div class="jumbotron col-md-10 col-xs-12 col-md-offset-1">
+
+    <center>
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <img class="card-details-image img-responsive" src="@Url.Content(Model.Card.ImageUrl)" />
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    switch (Model.UserRating)
+                    {
+                        case 0:
+                            <p>
+                                <span id="likes">@Model.Likes</span>
+                                <button class="rating-button btn btn-default btn-sm" id="like-card" onclick="rateCard(@Model.Card.CardID, 1)">+1</button>
+                            </p>
+                            break;
+
+                        case 1:
+                            <p>
+                                <span id="likes">@Model.Likes</span>
+                                <button class="rating-button btn btn-default btn-sm" id="like-card" style="background-color:green;" onclick="rateCard(@Model.Card.CardID, 1)">+1</button>
+                            </p>
+                            break;
+                    }
+                }
+                else
+                {
+                    <p>
+                        <span id="likes">@Model.Likes</span>
+                        <button class="rating-button btn btn-default btn-sm" id="like-card" onclick="redirectToLogin()">+1</button>
+                    </p>
+                }
+            </div>
+
+            <div class="col-md-6 col-xs-12">
+                <div class="well well-sm">
+                    <h2>@Model.Card.Name</h2>
+                    <hr />
+                    <p><strong>Text:</strong> @Model.Card.Text</p>
+                    <br />
+                    <p><strong>Type:</strong> @Model.Card.Type</p>
+                    <br />
+                    <p><strong>Rarity:</strong> @Model.Card.Rarity</p>
+                    <br />
+                    <p><strong>Set:</strong> @Model.Card.Set</p>
+                </div>
+            </div>
+        </div>
+    </center>
+
+
+    <div class="well well-sm">
+        <div id="@Model.Card.CardID" class="comments-vm-container">
+            @await Component.InvokeAsync("CardComments", new { id = Model.Card.CardID })
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <script src="~/js/CardDetails.js"></script>
+}

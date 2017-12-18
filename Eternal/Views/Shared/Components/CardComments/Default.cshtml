@@ -1,0 +1,96 @@
+﻿@model Eternal.Models.ViewModels.CardComments
+
+<div class="comments-container row">
+    <div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            foreach (var comment in Model.Comments)
+            {
+                var user = Model.Users.SingleOrDefault(u => u.UserID == comment.UserID);
+
+                switch (comment.UserRating)
+                {
+                    case 0:
+                        <div id="container-@comment.CardCommentID-container" class="col-md-12 col-xs-12">
+                            <div class="well well-sm" style="background-color:lightgrey;">
+                                <p id="container-@comment.CardCommentID"><strong id="username">@user.Username</strong> : <span id="text-@comment.CardCommentID">@comment.Comment</span></p>
+                                <p style="font-size:small;">
+                                    <span id="likes-@comment.CardCommentID">@comment.Rating</span>
+                                    <button class="rating-button btn btn-default btn-sm" id="like-comment-@comment.CardCommentID" onclick="rateComment(@comment.CardCommentID)">+ 1</button>
+                                    @if (comment.UserID.ToString() == User.Claims.ElementAt(0).Value)
+                                    {
+                                        <a id="@comment.CardCommentID" class="edit-comment-link" href="Edit">Edit</a>
+                                        <a id="@comment.CardCommentID" class="delete-comment-link" href="Delete">Delete</a>
+                                    }
+                                    else
+                                    {
+                                        <a id="@comment.CardCommentID" class="report-comment-link" href="Report">Report</a>
+                                    }
+                                </p>
+                                <p style="font-size:small;">@comment.Date</p>
+                            </div>
+                        </div>
+                        break;
+
+                    case 1:
+                        <div id="container-@comment.CardCommentID-container" class="col-md-12">
+                            <div class="well well-sm" style="background-color:lightgrey;">
+                                <p id="container-@comment.CardCommentID"><strong id="username">@user.Username</strong> : <span id="text-@comment.CardCommentID">@comment.Comment</span></p>
+                                <span id="likes-@comment.CardCommentID">@comment.Rating</span>
+                                <button class="rating-button btn btn-default btn-sm" id="like-comment-@comment.CardCommentID" style="background-color:green;" onclick="rateComment(@comment.CardCommentID)">+ 1</button>
+                                <p style="font-size:small;">
+                                    @if (comment.UserID.ToString() == User.Claims.ElementAt(0).Value)
+                                    {
+                                        <a id="@comment.CardCommentID" class="edit-comment-link" href="Edit">Edit</a>
+                                        <a id="@comment.CardCommentID" class="delete-comment-link" href="Delete">Delete</a>
+                                    }
+                                    else
+                                    {
+                                        <a id="@comment.CardCommentID" class="report-comment-link" href="Report">Report</a>
+                                    }
+                                </p>
+                                <p style="font-size:small;">@comment.Date</p>
+                            </div>
+                        </div>
+                        break;
+                }
+            }
+        }
+        else
+        {
+            foreach (var comment in Model.Comments)
+            {
+                var user = Model.Users.SingleOrDefault(u => u.UserID == comment.UserID);
+                <div class="col-md-12 col-xs-12">
+                    <div class="comment well well-sm" style="background-color:lightgrey;">
+                        <p><strong>@user.Username : </strong>@comment.Comment</p>
+                        <span id="likes-@comment.CardCommentID">@comment.Rating</span>
+                        <button class="rating-button btn btn-default btn-sm" onclick="redirectToLogin()">+ 1</button>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form name="comment-form" id="comment-form">
+                <div class="col-md-6 col-xs-6">
+                    <div class="well well-sm">
+                        <input class="comment-text form-control" name="comment-text" placeholder="Leave a comment..." />
+                    </div>
+                </div>
+                <input type="submit" hidden />
+            </form>
+        }
+        else
+        {
+            <div class="col-md-6 col-xs-6">
+                <div class="well well-sm">
+                    <p><a asp-controller="Users" asp-action="Login">Login/Register</a></p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

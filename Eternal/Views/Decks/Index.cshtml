@@ -1,0 +1,288 @@
+﻿@model PaginatedList<Eternal.Models.Deck>
+
+@{
+    ViewData["Title"] = "Deck Browser";
+}
+
+<div class="jumbotron col-md-10 col-xs-12 col-md-offset-1">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="well">
+                <form name="deck-filters" id="deck-filters">
+                    <div class="form-horizontal">
+
+                        <!-- search filter -->
+                        <div class="form-group">
+                            <div class="col-md-12 col-xs-12">
+                                <label>Search for a deck</label>
+                                <input name="searchFilter" class="form-control" value="@ViewData["SearchFilter"]" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12 col-xs-12">
+                                <label>Search for a user</label>
+                                <input name="userFilter" class="form-control" value="@ViewData["UserFilter"]" />
+                            </div>
+                        </div>
+
+                        <!-- factions filter -->
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <p style="font-size:medium;border-bottom:1px solid black;"><strong>Factions</strong></p>
+                                <span><img id="Fire" class="faction-icon" src="~/images/icons/factions/fire-icon.png" /></span>
+                                <span><img id="Time" class="faction-icon" src="~/images/icons/factions/time-icon.png" /></span>
+                                <span><img id="Justice" class="faction-icon" src="~/images/icons/factions/justice-icon.png" /></span>
+                                <span><img id="Primal" class="faction-icon" src="~/images/icons/factions/primal-icon.png" /></span>
+                                <span><img id="Shadow" class="faction-icon" src="~/images/icons/factions/shadow-icon.png" /></span>
+                                <input id="faction-filter" name="factionFilter" value="@ViewData["FactionFilter"]" hidden />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input class="btn btn-default" type="submit" value="Apply Filters" /> |
+                                <a asp-action="Index">Reset Filters</a>
+                                <!--<a style="display:inline-block;" href="#" id="reset-filter-link">Reset Filters</a>-->
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="col-md-8" id="decks-container">
+            <div id="decks-vm-container">
+                @{
+                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                }
+
+                <a asp-action="Index"
+                   asp-route-currentSearchFilter="@ViewData["SearchFilter"]"
+                   asp-route-currentFactionFilter="@ViewData["FactionFilter"]"
+                   asp-route-currentCostFilter="@ViewData["UserFilter"]"
+                   asp-route-page="@(Model.PageIndex - 1)"
+                   class="btn btn-default @prevDisabled">
+                    Previous
+                </a>
+
+                <a asp-action="Index"
+                   asp-route-currentSearchFilter="@ViewData["SearchFilter"]"
+                   asp-route-currentFactionFilter="@ViewData["FactionFilter"]"
+                   asp-route-currentCostFilter="@ViewData["UserFilter"]"
+                   asp-route-page="@(Model.PageIndex + 1)"
+                   class="btn btn-default @nextDisabled">
+                    Next
+                </a>
+
+                <div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Factions
+                                </th>
+                                <th>
+                                    Rating
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var deck in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-action="Details" asp-route-id="@deck.DeckID" style="font-size:medium;">@deck.Name</a>
+                                        <p style="font-size:smaller;">by <a asp-action="Index" asp-route-userFilter="@deck.User.Username">@deck.User.Username</a></p>
+                                    </td>
+                                    <td id="factions">
+                                        @{
+                                            var factions = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(deck.Factions);
+                                            foreach (var faction in factions)
+                                            {
+                                                <span><img style="width:20px;height:20px;" src="~/images/icons/factions/@faction.ToLower()-icon.png" /></span>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        <span style="color:green;">@deck.Rating</span>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        var factions = [];
+        var factionFilter = document.forms['deck-filters']['factionFilter'];
+
+        if (factionFilter.value !== '') {
+            factions = JSON.parse(factionFilter.value);
+            for (var i = 0; i < factions.length; i++) {
+                $('#' + factions[i]).attr('src', 'images/icons/factions/' + factions[i].toLowerCase() + '-icon-select.png');
+                $('#' + factions[i]).attr('id', factions[i] + '-Select');
+            }
+        }
+
+        // Highlight Faction Filters
+
+        $('.faction-icon')
+            .mouseenter(function () {
+                switch (this.id) {
+                    case 'Fire':
+                        $(this).attr('src', 'images/icons/factions/fire-icon-select.png');
+                        break;
+                    case 'Time':
+                        $(this).attr('src', 'images/icons/factions/time-icon-select.png');
+                        break;
+                    case 'Justice':
+                        $(this).attr('src', 'images/icons/factions/justice-icon-select.png');
+                        break;
+                    case 'Primal':
+                        $(this).attr('src', 'images/icons/factions/primal-icon-select.png');
+                        break;
+                    case 'Shadow':
+                        $(this).attr('src', 'images/icons/factions/shadow-icon-select.png');
+                        break;
+                }
+            })
+            .mouseleave(function () {
+                switch (this.id) {
+                    case 'Fire':
+                        $(this).attr('src', 'images/icons/factions/fire-icon.png');
+                        break;
+                    case 'Time':
+                        $(this).attr('src', 'images/icons/factions/time-icon.png');
+                        break;
+                    case 'Justice':
+                        $(this).attr('src', 'images/icons/factions/justice-icon.png');
+                        break;
+                    case 'Primal':
+                        $(this).attr('src', 'images/icons/factions/primal-icon.png');
+                        break;
+                    case 'Shadow':
+                        $(this).attr('src', 'images/icons/factions/shadow-icon.png');
+                        break;
+                }
+            })
+            .click(function () {
+                switch (this.id) {
+                    case 'Fire':
+                        factions.push(this.id);
+                        $(this).attr('src', 'images/icons/factions/fire-icon-select.png');
+                        $(this).attr('id', 'Fire-Select');
+                        break;
+                    case 'Fire-Select':
+                        $(this).attr('src', 'images/icons/factions/fire-icon.png');
+                        $(this).attr('id', 'Fire');
+                        var deselectedFaction = this.id;
+                        factions = factions.filter(function (faction) {
+                            return faction !== deselectedFaction;
+                        });
+                        break;
+                    case 'Time':
+                        factions.push(this.id);
+                        $(this).attr('src', 'images/icons/factions/time-icon-select.png');
+                        $(this).attr('id', 'Time-Select');
+                        break;
+                    case 'Time-Select':
+                        $(this).attr('src', 'images/icons/factions/time-icon.png');
+                        $(this).attr('id', 'Time');
+                        var deselectedFaction = this.id;
+                        factions = factions.filter(function (faction) {
+                            return faction !== deselectedFaction;
+                        });
+                        break;
+                    case 'Justice':
+                        factions.push(this.id);
+                        $(this).attr('src', 'images/icons/factions/justice-icon-select.png');
+                        $(this).attr('id', 'Justice-Select');
+                        break;
+                    case 'Justice-Select':
+                        $(this).attr('src', 'images/icons/factions/justice-icon.png');
+                        $(this).attr('id', 'Justice');
+                        var deselectedFaction = this.id;
+                        factions = factions.filter(function (faction) {
+                            return faction !== deselectedFaction;
+                        });
+                        break;
+                    case 'Primal':
+                        factions.push(this.id);
+                        $(this).attr('src', 'images/icons/factions/primal-icon-select.png');
+                        $(this).attr('id', 'Primal-Select');
+                        break;
+                    case 'Primal-Select':
+                        $(this).attr('src', 'images/icons/factions/primal-icon.png');
+                        $(this).attr('id', 'Primal');
+                        var deselectedFaction = this.id;
+                        factions = factions.filter(function (faction) {
+                            return faction !== deselectedFaction;
+                        });
+                        break;
+                    case 'Shadow':
+                        factions.push(this.id);
+                        $(this).attr('src', 'images/icons/factions/shadow-icon-select.png');
+                        $(this).attr('id', 'Shadow-Select');
+                        break;
+                    case 'Shadow-Select':
+                        $(this).attr('src', 'images/icons/factions/shadow-icon.png');
+                        $(this).attr('id', 'Shadow');
+                        var deselectedFaction = this.id;
+                        factions = factions.filter(function (faction) {
+                            return faction !== deselectedFaction;
+                        });
+                        break;
+                }
+            });
+
+        // Reset Filters
+
+        $('#reset-filter-link').click(function (e) {
+            e.preventDefault();
+            document.forms['deck-filters']['searchFilter'].value = '';
+            document.forms['deck-filters']['factionFilter'].value = '';
+            document.forms['deck-filters']['userFilter'].value = '';
+            for (var i = 0; i < factions.length; i++) {
+                $('#' + factions[i] + '-Select')
+                    .attr('src', 'images/icons/factions/' + factions[i].toLowerCase() + '-icon.png')
+                    .attr('id', factions[i]);
+            }
+            factions = [];
+            console.log(factions);
+        });
+
+        // Submit Filters Form
+
+        $('#deck-filters').submit(function () {
+            var orderedFactions = [];
+            var factionList = ['Fire', 'Time', 'Justice', 'Primal', 'Shadow'];
+            factionList.forEach(function (faction) {
+                if (factions.includes(faction)) {
+                    orderedFactions.push(faction);
+                }
+            });
+
+            if (orderedFactions.length === 0) {
+                factionFilter.value = '';
+            } else {
+                factionFilter.value = JSON.stringify(orderedFactions);
+            }
+        });
+    </script>
+}

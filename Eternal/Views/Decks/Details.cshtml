@@ -1,0 +1,117 @@
+﻿@model Eternal.Models.ViewModels.DeckDetails
+
+@{
+    ViewData["Title"] = Model.Deck.Name;
+}
+
+<div class="jumbotron col-md-10 col-xs-12 col-md-offset-1">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">
+                <center>
+                    <h2>@Model.Deck.Name</h2>
+                    <p>by <a asp-action="Index" asp-route-userFilter="@Model.User.Username">@Model.User.Username</a></p>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        switch (Model.UserRating)
+                        {
+                            case 0:
+                                <p>
+                                    <span id="deck-likes">@Model.Likes</span>
+                                    <button id="like" class="rating-button btn btn-default" onclick="rateDeck(@Model.Deck.DeckID)">+1</button>
+                                </p>
+                                break;
+
+                            case 1:
+                                <p>
+                                    <span id="deck-likes">@Model.Likes</span>
+                                    <button id="like" class="rating-button btn btn-default" style="background-color:green;" onclick="rateDeck(@Model.Deck.DeckID)">+1</button>
+                                </p>
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        <p>
+                            <span id="deck-likes">@Model.Likes</span>
+                            <button id="like" class="rating-button btn btn-default" onclick="redirectToLogin()">+1</button>
+                        </p>
+                    }
+                </center>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-9 col-xs-9 deck-guide-wrapper">
+            <p class="deck-guide-content">
+                @Model.Deck.Guide
+            </p>
+        </div>
+
+        <div class="col-md-3 col-xs-3 well well-sm card-list-wrapper">
+            <center>
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Card</th>
+                            <th style="text-align:center;">Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var card in Model.Cards)
+                            {
+                                // var card = Model.Cards.Single(c => c.CardID == deckCard.CardID);
+                                <tr>
+                                    <td>
+                                        @switch (card.Rarity)
+                                        {
+                                            case "Uncommon":
+                                                <a id="@card.Name" class="decklist-card-link" style="color:limegreen;" asp-action="Details" asp-controller="Cards" asp-route-id="@card.CardID">
+                                                    @card.Name
+                                                </a>
+                                                break;
+                                            case "Rare":
+                                                <a id="@card.Name" class="decklist-card-link" style="color:blue;" asp-action="Details" asp-controller="Cards" asp-route-id="@card.CardID">
+                                                    @card.Name
+                                                </a>
+                                                break;
+                                            case "Legendary":
+                                                <a id="@card.Name" class="decklist-card-link" style="color:darkorange;" asp-action="Details" asp-controller="Cards" asp-route-id="@card.CardID">
+                                                    @card.Name
+                                                </a>
+                                                break;
+                                            default:
+                                                <a id="@card.Name" class="decklist-card-link" style="color:grey;" asp-action="Details" asp-controller="Cards" asp-route-id="@card.CardID">
+                                                    @card.Name
+                                                </a>
+                                                break;
+                                        }
+                                    </td>
+                                    <td style="text-align:center;">
+                                        @card.Count
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </center>
+        </div>
+    </div>
+
+    <div class="well well-sm">
+        <div id="@Model.Deck.DeckID" class="comments-section">
+            @await Component.InvokeAsync("DeckComments", new { id = Model.Deck.DeckID })
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="~/js/DeckDetails.js"></script>
+}

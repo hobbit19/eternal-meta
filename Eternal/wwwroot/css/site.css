@@ -7,7 +7,9 @@
 html {
 }
 
-.navbar {
+.navbar,
+footer {
+    opacity: .95;
 }
 
 .panel {
@@ -23,6 +25,7 @@ footer {
     margin-top: 100px;
     margin-bottom: 100px;
     background-color: white;
+    opacity: .95;
 }
 
 .container-fluid .jumbotron {
@@ -164,4 +167,12 @@ textarea {
 .username {
     margin: auto;
     overflow-wrap: break-word;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.form-control {
+    border-radius: 0;
 }

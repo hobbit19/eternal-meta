@@ -7,11 +7,11 @@
         var nextDisabled = !Model.HasNextPage ? "disabled" : "";
     }
 
-    <button style="float:left;" class="btn btn-default" onclick="changePage(@(Model.PageIndex - 1), '@ViewData["SearchFilter"]', '@ViewData["FactionFilter"]', '@ViewData["CostFilter"]')" @prevDisabled>
+    <button style="float:left;" class="btn btn-success" onclick="changePage(@(Model.PageIndex - 1), '@ViewData["SearchFilter"]', '@ViewData["FactionFilter"]', '@ViewData["CostFilter"]')" @prevDisabled>
         Previous
     </button>
 
-    <button style="float:right;" class="btn btn-default" onclick="changePage(@(Model.PageIndex + 1), '@ViewData["SearchFilter"]', '@ViewData["FactionFilter"]', '@ViewData["CostFilter"]')" @nextDisabled>
+    <button style="float:right;" class="btn btn-success" onclick="changePage(@(Model.PageIndex + 1), '@ViewData["SearchFilter"]', '@ViewData["FactionFilter"]', '@ViewData["CostFilter"]')" @nextDisabled>
         Next
     </button>
 

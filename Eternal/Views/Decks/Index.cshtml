@@ -6,8 +6,9 @@
 
 <div class="jumbotron col-md-10 col-xs-12 col-md-offset-1">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 col-xs-12">
             <div class="well">
+
                 <form name="deck-filters" id="deck-filters">
                     <div class="form-horizontal">
 
@@ -19,6 +20,7 @@
                             </div>
                         </div>
 
+                        <!-- user filter -->
                         <div class="form-group">
                             <div class="col-md-12 col-xs-12">
                                 <label>Search for a user</label>
@@ -41,7 +43,7 @@
 
                         <div class="form-group">
                             <div class="col-md-12">
-                                <input class="btn btn-default" type="submit" value="Apply Filters" /> |
+                                <input class="btn btn-primary" type="submit" value="Apply Filters" /> |
                                 <a style="display:inline-block;" href="#" id="reset-filter-link">Reset Filters</a>
                             </div>
                         </div>
@@ -52,73 +54,73 @@
             </div>
         </div>
 
-        <div class="col-md-8" id="decks-container">
-            <div id="decks-vm-container">
-                @{
-                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-                }
+        <div class="col-md-8">
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
 
-                <a asp-action="Index"
-                   asp-route-currentSearchFilter="@ViewData["SearchFilter"]"
-                   asp-route-currentFactionFilter="@ViewData["FactionFilter"]"
-                   asp-route-currentCostFilter="@ViewData["UserFilter"]"
-                   asp-route-page="@(Model.PageIndex - 1)"
-                   class="btn btn-default @prevDisabled">
-                    Previous
-                </a>
+            <a asp-action="Index"
+               asp-route-currentSearchFilter="@ViewData["SearchFilter"]"
+               asp-route-currentFactionFilter="@ViewData["FactionFilter"]"
+               asp-route-currentCostFilter="@ViewData["UserFilter"]"
+               asp-route-page="@(Model.PageIndex - 1)"
+               class="btn btn-success @prevDisabled">
+                Previous
+            </a>
 
-                <a asp-action="Index"
-                   asp-route-currentSearchFilter="@ViewData["SearchFilter"]"
-                   asp-route-currentFactionFilter="@ViewData["FactionFilter"]"
-                   asp-route-currentCostFilter="@ViewData["UserFilter"]"
-                   asp-route-page="@(Model.PageIndex + 1)"
-                   class="btn btn-default @nextDisabled">
-                    Next
-                </a>
+            <a asp-action="Index"
+               asp-route-currentSearchFilter="@ViewData["SearchFilter"]"
+               asp-route-currentFactionFilter="@ViewData["FactionFilter"]"
+               asp-route-currentCostFilter="@ViewData["UserFilter"]"
+               asp-route-page="@(Model.PageIndex + 1)"
+               class="btn btn-success @nextDisabled">
+                Next
+            </a>
 
-                <div>
-                    <table class="table table-hover">
-                        <thead>
+            <hr />
+
+            <div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Factions
+                            </th>
+                            <th>
+                                Rating
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var deck in Model)
+                        {
                             <tr>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Factions
-                                </th>
-                                <th>
-                                    Rating
-                                </th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var deck in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        <a asp-action="Details" asp-route-id="@deck.DeckID" style="font-size:medium;">@deck.Name</a>
-                                        <p style="font-size:smaller;">by <a asp-action="Index" asp-route-userFilter="@deck.User.Username">@deck.User.Username</a></p>
-                                    </td>
-                                    <td id="factions">
-                                        @{
-                                            var factions = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(deck.Factions);
-                                            foreach (var faction in factions)
-                                            {
-                                                <span><img style="width:20px;height:20px;" src="~/images/icons/factions/@faction.ToLower()-icon.png" /></span>
-                                            }
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@deck.DeckID" style="font-size:medium;">@deck.Name</a>
+                                    <p style="font-size:smaller;">by <a asp-action="Index" asp-route-userFilter="@deck.User.Username">@deck.User.Username</a></p>
+                                </td>
+                                <td id="factions">
+                                    @{
+                                        var factions = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(deck.Factions);
+                                        foreach (var faction in factions)
+                                        {
+                                            <span><img style="width:20px;height:20px;" src="~/images/icons/factions/@faction.ToLower()-icon.png" /></span>
                                         }
-                                    </td>
-                                    <td>
-                                        <span style="color:green;">@deck.Rating</span>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                                    }
+                                </td>
+                                <td>
+                                    <span style="color:green;">@deck.Rating</span>
+                                </td>
+                                <td></td>
+                            </tr>
+                                        }
+                    </tbody>
+                </table>
             </div>
         </div>
 

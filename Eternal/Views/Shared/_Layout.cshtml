@@ -18,7 +18,7 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -41,7 +41,7 @@
     </nav>
     <div class="container-fluid body-content">
         @RenderBody()
-        <footer class="col-md-12 col-xs-12" id="footer" style="background-color:black;padding:10px;">
+        <footer class="col-md-12 col-xs-12" id="footer" style="padding:10px;">
             <div class="col-md-3">
                 <center>
                     <h3>Menu</h3>
@@ -50,13 +50,11 @@
                     <p class="footer-link">@Html.ActionLink("Decks", "Index", "Decks")</p>
                     <p class="footer-link">@Html.ActionLink("Deck Builder", "Create", "Decks")</p>
                     <p class="footer-link">@Html.ActionLink("Login / Register", "Login", "Users")</p>
-                    <p class="footer-link">@Html.ActionLink("Privacy Policy", "PrivacyPolicy", "Home")</p>
                 </center>
             </div>
             <div class="col-md-4">
                 <center>
                     <h3>Contact</h3>
-                    <p class="footer-link">Personal Site: <a href="http://jessiecryer.com">jessiecryer.com</a></p>
                     <p class="footer-link">Email: info@eternalmeta.com</p>
                 </center>
             </div>

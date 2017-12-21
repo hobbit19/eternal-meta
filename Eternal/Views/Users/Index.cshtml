@@ -25,7 +25,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th colspan="2" style="text-align:center;">My Decks</th>
+                            <th colspan="2">My Decks</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +33,7 @@
                         {
                             <tr>
                                 <td>
-                                    @deck.Name
+                                    @Html.ActionLink(deck.Name, "Details", "Decks", new { id = deck.DeckID})
                                 </td>
                                 <td>
                                     @Html.ActionLink("Edit", "Edit", "Decks", new { id = deck.DeckID }) |

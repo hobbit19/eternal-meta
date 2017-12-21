@@ -30,16 +30,16 @@ primary key (UserID)
 );
 
 create table CardRating (
-CardID int references [Card](CardID),
-UserID int references [User](UserID),
+CardID int references [Card](CardID) on delete cascade,
+UserID int references [User](UserID) on delete cascade,
 [Date] date,
 primary key clustered (CardID, UserID)
 );
 
 create table CardComment (
 CardCommentID int identity(1,1),
-CardID int references [Card](CardID),
-UserID int references [User](UserID),
+CardID int references [Card](CardID) on delete cascade,
+UserID int references [User](UserID) on delete cascade,
 Comment varchar(300) not null,
 Reports int default 0,
 [Date] date,
@@ -47,7 +47,7 @@ primary key (CardCommentID)
 );
 
 create table CardCommentRating (
-CardCommentID int references [CardComment](CardCommentID),
+CardCommentID int references [CardComment](CardCommentID) on delete cascade,
 UserID int references [User](UserID),
 primary key clustered (CardCommentID, UserID)
 );
@@ -64,16 +64,16 @@ primary key (DeckID)
 );
 
 create table DeckRating (
-DeckID int references [Deck](DeckID),
-UserID int references [User](UserID),
+DeckID int references [Deck](DeckID) on delete cascade,
+UserID int references [User](UserID) on delete cascade,
 [Date] date,
 primary key clustered (DeckID, UserID)
 );
 
 create table DeckComment (
 DeckCommentID int identity(1,1),
-DeckID int references [Deck](DeckID),
-UserID int references [User](UserID),
+DeckID int references [Deck](DeckID) on delete cascade,
+UserID int references [User](UserID) on delete cascade,
 Comment varchar(300) not null,
 Reports int default 0,
 [Date] date,
@@ -81,7 +81,7 @@ primary key (DeckCommentID)
 );
 
 create table DeckCommentRating (
-DeckCommentID int references [DeckComment](DeckCommentID),
+DeckCommentID int references [DeckComment](DeckCommentID) on delete cascade,
 UserID int references [User](UserID),
 primary key clustered (DeckCommentID, UserID)
 );
